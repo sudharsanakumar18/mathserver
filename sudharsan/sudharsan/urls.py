@@ -18,8 +18,8 @@ from django.urls import path
 from myapp import views
 urlpatterns = [
     path('admin/' , admin.site.urls),
-    path('areaofrectangle/',views.rectarea,name="areaofrectangle"),
-    path('',views.rectarea,name="areaofrectangleroot")
+    path('areaoftriangle/',views.triarea,name="areaoftriangle"),
+    path('',views.triarea,name="areaoftriangleroot")
 ]
 
 
