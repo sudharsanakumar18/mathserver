@@ -70,14 +70,14 @@ padding-top: 20px;
 <body>
 <div class="edge">
 <div class="box">
-<h1>Area of a Rectangle</h1>
+<h1>Area of a triangle</h1>
 <form method="POST">
 {% csrf_token %}
 <div class="formelt">
-Length : <input type="text" name="length" value="{{l}}"></input>(in m)<br/>
+Height : <input type="text" name="height" value="{{h}}"></input>(in m)<br/>
 </div>
 <div class="formelt">
-Breadth : <input type="text" name="breadth" value="{{b}}"></input>(in m)<br/>
+Base : <input type="text" name="base" value="{{b}}"></input>(in m)<br/>
 </div>
 <div class="formelt">
 <input type="submit" value="Calculate"></input><br/>
@@ -92,25 +92,26 @@ Area : <input type="text" name="area" value="{{area}}"></input>m<sup>2</sup><br/
 </html>
 
 views.py
+
 from django.shortcuts import render
-def rectarea(request):
+def triarea(request):
     context={}
     context['area'] = "0"
-    context['1'] = "0"
+    context['h'] = "0"
     context['b'] = "0"
     if request.method == 'POST':
         print("POST method is used")
-        l = request.POST.get('length','0')
-        b = request.POST.get('breath','0')
+        h = request.POST.get('height','0')
+        b = request.POST.get('base','0')
         print('request=',request)
-        print('Length=',l)
-        print('Breadth=',b)
-        area = int(1) * int(b)
+        print('Height=',h)
+        print('Base=',b)
+        area = 0.5 * int(h) * int(b)
         context['area'] = area
-        context['l'] = l 
+        context['h'] = h
         context['b'] = b
         print('Area=',area)
-    return render(request,'myapp/math.html',context)
+    return render(request,'myapp/math.html',context)    
 
 urls.py
 
@@ -119,16 +120,16 @@ from django.urls import path
 from myapp import views
 urlpatterns = [
     path('admin/' , admin.site.urls),
-    path('areaofrectangle/',views.rectarea,name="areaofrectangle"),
-    path('',views.rectarea,name="areaofrectangleroot")
+    path('areaoftriangle/',views.triarea,name="areaoftriangle"),
+    path('',views.triarea,name="areaoftriangleroot")
 ]
 ```
 
 ## OUTPUT:
-![OUTPUT](./out.png)
+![OUTPUT](./home.png)
 
 ## HOME PAGE:
-![Home page](./home.png)
+![Home page](./win.png)
 
 ## RESULT:
 The program for performing server side processing is completed successfully.
